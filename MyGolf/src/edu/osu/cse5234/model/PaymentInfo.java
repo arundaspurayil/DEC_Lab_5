@@ -1,12 +1,10 @@
-package edu.osu.cse5234.controller;
+package edu.osu.cse5234.model;
 
 public class PaymentInfo {
 	private String creditCardNumber;
 	private String expirationDate;
 	private String cvvCode;
-	private String city;
-	private String state;
-	private String zip;
+	private String cardHolderName;
 	
 	public String getCreditCardNumber() {
 		return creditCardNumber;
@@ -26,24 +24,11 @@ public class PaymentInfo {
 	public void setCvvCode(String cvvCode) {
 		this.cvvCode = cvvCode;
 	}
-	public String getCity() {
-		return city;
+	public String getCardHolderName() {
+		return cardHolderName;
 	}
-	public void setCity(String city) {
-		this.city = city;
+	public void setCardHolderName(String cardHolderName) {
+		this.cardHolderName = cardHolderName;
 	}
-	public String getState() {
-		return state;
-	}
-	public void setState(String state) {
-		this.state = state;
-	}
-	public String getZip() {
-		return zip;
-	}
-	public void setZip(String zip) {
-		this.zip = zip;
-	}
-	
 	
 }
