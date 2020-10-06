@@ -33,27 +33,22 @@ public class PurchaseController {
 			Item golfBalls = new Item();
 			golfBalls.setName("Golf Balls");
 			golfBalls.setPrice("1");
-//			golfBalls.setQuantity("100");
 			
 			Item wedge = new Item();
 			wedge.setName("Wedge");
 			wedge.setPrice("100");
-//			wedge.setQuantity("25");
 			
 			Item driver = new Item();
 			driver.setName("Driver");
 			driver.setPrice("400");
-//			driver.setQuantity("5");
 			
 			Item golfShoes = new Item();
 			golfShoes.setName("Golf Shoes");
 			golfShoes.setPrice("25");
-//			golfShoes.setQuantity("200");
 			
 			Item golfGloves = new Item();
 			golfGloves.setName("Golf Gloves");
 			golfGloves.setPrice("5");
-//			golfGloves.setQuantity("50");
 			
 			storeItems.add(golfBalls);
 			storeItems.add(wedge);

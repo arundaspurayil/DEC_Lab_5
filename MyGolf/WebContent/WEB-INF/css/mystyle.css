@@ -12,3 +12,12 @@ html,body{
   height: 35px;
   line-height: 35px; /* Vertically center the text there */
 }
+
+.image-row{
+	background-image: url(https://i.pinimg.com/originals/f2/56/fa/f256fa53f4a71faeafdc7d83ece05548.jpg);
+}
+
+.store-name{
+	font-size: 100px;
+	color: whitesmoke;
+}
