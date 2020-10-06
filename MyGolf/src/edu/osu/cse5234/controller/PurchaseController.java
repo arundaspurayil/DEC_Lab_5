@@ -100,7 +100,6 @@ public class PurchaseController {
 	
 	@RequestMapping(path = "/paymentEntry", method = RequestMethod.GET)
 	public String viewPaymentEntryPage(HttpServletRequest request, HttpServletResponse response) {
-		
 		request.setAttribute("payment", new PaymentInfo());	
 		handleErrors(request);
 		return "PaymentEntryForm";
