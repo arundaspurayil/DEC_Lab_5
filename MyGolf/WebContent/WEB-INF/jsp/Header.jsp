@@ -20,17 +20,26 @@
 	</head>
 	
 	<body style="background-color:#f0f0f0;">
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  			<a class="navbar-brand" href="/MyGolf/">MyGolfStore</a>
-  			<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-        		<ul class="navbar-nav ml-auto">
-		            <li class="nav-item">
-		                <a class="nav-link" href="/MyGolf/">Home</a>
+	
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end">
+		    <a class="navbar-brand" href="/MyGolf/">MyGolfStore</a>
+		    
+		    <div class="navbar-nav ml-auto">
+	
+		    	<a class="nav-item nav-link active " href="#">Purchase</a>
+
+		    </div>
+		    
+		    <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
+		        <ul class="navbar-nav text-right">
+		            <li class="nav-item active">
+		                <a class="nav-link" href="#">About Us</a>
 		            </li>
-	            	<li class="nav-item">
-	                	<a class="nav-link" href="/MyGolf/purchase">Purchase</a>
-	            	</li>
-        		</ul>
-    		</div>
+		            <li class="nav-item active">
+		                <a class="nav-link" href="#">Contact Us</a>
+		            </li>
+		        </ul>
+		    </div>
 		</nav>
+
 
