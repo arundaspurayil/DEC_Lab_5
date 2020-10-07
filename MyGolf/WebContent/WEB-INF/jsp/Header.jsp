@@ -26,7 +26,7 @@
 		    
 		    <div class="navbar-nav ml-auto">
 	
-		    	<a class="nav-item nav-link active " href="#">Purchase</a>
+		    	<a class="nav-item nav-link active " href="/MyGolf/purchase">Purchase</a>
 
 		    </div>
 		    

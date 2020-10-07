@@ -9,9 +9,7 @@
 	        			<p class="store-mission" >One stop shop for all your golf needs</p>
 	        			<button type="button" class="btn btn-light" >Shop Now</button>
         			</div>
-
         		</div>
-        		
         	</div>
      </div> 
 </div>   

@@ -22,40 +22,39 @@ import edu.osu.cse5234.model.ShippingInfo;
 @RequestMapping("/purchase")
 public class PurchaseController {
 	
-	List<Item> storeItems = new ArrayList<>();
 	String error = "";
 	
 	@RequestMapping(method= RequestMethod.GET)
 	public String viewOrderEntryForm(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		
+		List<Item> storeItems = new ArrayList<>();
+
 		handleErrors(request);
-		if(storeItems.size() == 0) {
-			Item golfBalls = new Item();
-			golfBalls.setName("Golf Balls");
-			golfBalls.setPrice("1");
-			
-			Item wedge = new Item();
-			wedge.setName("Wedge");
-			wedge.setPrice("100");
-			
-			Item driver = new Item();
-			driver.setName("Driver");
-			driver.setPrice("400");
-			
-			Item golfShoes = new Item();
-			golfShoes.setName("Golf Shoes");
-			golfShoes.setPrice("25");
-			
-			Item golfGloves = new Item();
-			golfGloves.setName("Golf Gloves");
-			golfGloves.setPrice("5");
-			
-			storeItems.add(golfBalls);
-			storeItems.add(wedge);
-			storeItems.add(driver);
-			storeItems.add(golfShoes);
-			storeItems.add(golfGloves);
-		}
+		
+		Item golfBalls = new Item();
+		golfBalls.setName("Golf Balls");
+		golfBalls.setPrice("1");
+		
+		Item wedge = new Item();
+		wedge.setName("Wedge");
+		wedge.setPrice("100");
+		
+		Item driver = new Item();
+		driver.setName("Driver");
+		driver.setPrice("400");
+		
+		Item golfShoes = new Item();
+		golfShoes.setName("Golf Shoes");
+		golfShoes.setPrice("25");
+		
+		Item golfGloves = new Item();
+		golfGloves.setName("Golf Gloves");
+		golfGloves.setPrice("5");
+		
+		storeItems.add(golfBalls);
+		storeItems.add(wedge);
+		storeItems.add(driver);
+		storeItems.add(golfShoes);
+		storeItems.add(golfGloves);
 		
 		Order order = new Order();
 		order.setItems(storeItems);
@@ -68,7 +67,7 @@ public class PurchaseController {
 	public String submitItems(@ModelAttribute("order") Order order, HttpServletRequest request) {
 		List<Item> userItems = order.getItems();
 		int total = 0;
-		for(int x = 0; x < storeItems.size(); x++) {
+		for(int x = 0; x < userItems.size(); x++) {
 			if (userItems.get(x).getQuantity().isEmpty()) {
 				userItems.get(x).setQuantity("0");
 			}
