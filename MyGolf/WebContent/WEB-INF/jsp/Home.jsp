@@ -6,8 +6,8 @@
         		<div class="d-flex flex-column h-100 justify-content-center ">
         			<div>
 	        			<h1 class="store-name" >My Golf Store</h1>
+	        			<br/>
 	        			<p class="store-mission" >One stop shop for all your golf needs</p>
-	        			<button type="button" class="btn btn-light" >Shop Now</button>
         			</div>
         		</div>
         	</div>

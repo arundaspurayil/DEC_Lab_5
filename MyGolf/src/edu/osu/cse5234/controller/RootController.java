@@ -30,7 +30,17 @@ public class RootController {
 		return "PaymentEntryForm";
 	}
 	
+	@RequestMapping(path = "/aboutUs", method = RequestMethod.GET)
+	public String displayAboutUs(HttpServletRequest request, HttpServletResponse response) {
+		
+		return "AboutUs";
+	}
 	
+	@RequestMapping(path = "/contactUs", method = RequestMethod.GET)
+	public String displayContactUs(HttpServletRequest request, HttpServletResponse response) {
+		
+		return "ContactUs";
+	}
 
 
 }

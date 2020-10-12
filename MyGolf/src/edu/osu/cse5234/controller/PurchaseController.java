@@ -179,6 +179,7 @@ public class PurchaseController {
 		return "Confirmation";
 	}
 	
+	
 	private boolean onlyDigits(String str) {
 		int n = str.length();
 		for (int i=0; i<n; i++) {
