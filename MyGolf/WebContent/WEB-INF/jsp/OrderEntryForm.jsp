@@ -7,15 +7,17 @@
 
 
 <div class="container-fluid"> <br/>
-  	<c:if test = "${errors != null}">
-  	<div class="alert alert-primary" role="alert">
-		<p> <c:out value="${errors}"></c:out> </p>
-	</div>
-</c:if>
+  	
+	  	<div id="order-entry-errors" class="alert alert-primary" role="alert">
+	  		<c:if test = "${errors != null}">
+				<p> <c:out value="${errors}"></c:out> </p>
+			</c:if>
+		</div>
+	
 
   <div class="row justify-content-md-center">
     <div class="col-md-8">
-      <form:form modelAttribute="order" method="post" action="purchase/submitItems">
+      <form:form id="order-entry-form" modelAttribute="order" method="post" action="purchase/submitItems">
 
 	    <table class="table table-bordered table-light" >
 		    <thead class="thead-dark">
@@ -31,20 +33,22 @@
 				<c:forEach items="${order.items}" var="item" varStatus="loop">
 					<tr>
 						<td><c:out value="${item.name}"></c:out></td>
-						<form:hidden path="items[${loop.index}].name" value="${item.name}"/>
+						<form:hidden  path="items[${loop.index}].name" value="${item.name}"/>
 						
 						<td><c:out value="$${item.price}"></c:out></td>
 						<form:hidden path="items[${loop.index}].price" value="${item.price}"/>
 						
-						<td><form:input class="form-control" path="items[${loop.index}].quantity" /></td>
+						<td><form:input id="${item.name}" class="form-control" path="items[${loop.index}].quantity" /></td>
 					</tr>
 				</c:forEach>
 	    </table>
-	    <input class="btn btn-primary" type="submit" value="Purchase">
+	    <input id="order-submit-button" class="btn btn-primary"  value="Purchase">
 	</form:form>
     </div>
   </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script><%@include file="/WEB-INF/javascripts/quantityValidation.js"%></script>
 
 <jsp:include page="Footer.jsp"/>
 
