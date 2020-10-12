@@ -33,10 +33,10 @@
 		    <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
 		        <ul class="navbar-nav text-right">
 		            <li class="nav-item active">
-		                <a class="nav-link" href="#">About Us</a>
+		                <a class="nav-link" href="/MyGolf/about">About Us</a>
 		            </li>
 		            <li class="nav-item active">
-		                <a class="nav-link" href="#">Contact Us</a>
+		                <a class="nav-link" href="/MyGolf/contact">Contact Us</a>
 		            </li>
 		        </ul>
 		    </div>
