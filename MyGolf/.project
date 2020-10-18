@@ -3,6 +3,7 @@
 	<name>MyGolf</name>
 	<comment></comment>
 	<projects>
+		<project>MyGolf-InventoryManagement-EJBClient</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
