@@ -1,7 +1,6 @@
 package edu.osu.cse5234.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,48 +12,29 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import edu.osu.cse5234.business.OrderProcessingServiceBean;
+import edu.osu.cse5234.business.view.Inventory;
+import edu.osu.cse5234.business.view.InventoryService;
 import edu.osu.cse5234.model.Item;
 import edu.osu.cse5234.model.Order;
 import edu.osu.cse5234.model.PaymentInfo;
 import edu.osu.cse5234.model.ShippingInfo;
+import edu.osu.cse5234.util.ServiceLocator;
 
 @Controller
 @RequestMapping("/purchase")
 public class PurchaseController {
-	
+
 	String error = "";
 	
 	@RequestMapping(method= RequestMethod.GET)
 	public String viewOrderEntryForm(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		List<Item> storeItems = new ArrayList<>();
-
+		 
 		handleErrors(request);
 		
-		Item golfBalls = new Item();
-		golfBalls.setName("Golf Balls");
-		golfBalls.setPrice("1");
-		
-		Item wedge = new Item();
-		wedge.setName("Wedge");
-		wedge.setPrice("100");
-		
-		Item driver = new Item();
-		driver.setName("Driver");
-		driver.setPrice("400");
-		
-		Item golfShoes = new Item();
-		golfShoes.setName("Golf Shoes");
-		golfShoes.setPrice("25");
-		
-		Item golfGloves = new Item();
-		golfGloves.setName("Golf Gloves");
-		golfGloves.setPrice("5");
-		
-		storeItems.add(golfBalls);
-		storeItems.add(wedge);
-		storeItems.add(driver);
-		storeItems.add(golfShoes);
-		storeItems.add(golfGloves);
+		InventoryService inventoryService = ServiceLocator.getInventoryService();
+		Inventory inventory = inventoryService.getAvailableInventory();
+		List<Item> storeItems = inventory.getListofItems();
 		
 		Order order = new Order();
 		order.setItems(storeItems);
@@ -85,6 +65,14 @@ public class PurchaseController {
 			}
 			
 			total += userQuantity * Integer.parseInt(userItems.get(x).getPrice());
+		}
+		
+		OrderProcessingServiceBean orderProcessor = ServiceLocator.getOrderProcessingService();
+		boolean validOrder = orderProcessor.validateItemAvailability(order); 
+		if (!validOrder) {
+			error = "Please resubmit item quantities\n";
+			request.getSession().setAttribute("errors", error);
+			return "redirect:/purchase";
 		}
 		
 		request.getSession().setAttribute("total", total);
@@ -169,7 +157,10 @@ public class PurchaseController {
 	
 	@RequestMapping(path = "/confirmOrder", method = RequestMethod.POST)
 	public String confirmOrder(HttpServletRequest request, HttpServletResponse response) {
-		
+		Order order = (Order) request.getSession().getAttribute("order");
+		OrderProcessingServiceBean orderProcessor = ServiceLocator.getOrderProcessingService();
+		String orderId = orderProcessor.processOrder(order);
+		request.getSession().setAttribute("orderId", orderId);
 		return "redirect:/purchase/viewConfirmation";
 	}
 	

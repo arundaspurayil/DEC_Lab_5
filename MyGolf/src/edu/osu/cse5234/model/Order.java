@@ -2,6 +2,8 @@ package edu.osu.cse5234.model;
 
 import java.util.List;
 
+import edu.osu.cse5234.model.Item;
+
 public class Order {
 	private List<Item> items;
 

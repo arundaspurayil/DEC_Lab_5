@@ -9,10 +9,14 @@
 <div class="container-fluid"> <br/>
   	
 	  	<div id="order-entry-errors" class="alert alert-primary" role="alert">
-	  		<c:if test = "${errors != null}">
-				<p> <c:out value="${errors}"></c:out> </p>
-			</c:if>
+	  		
 		</div>
+		
+	  		<c:if test = "${errors != null}">
+	  		<div class="alert alert-primary" role="alert">
+				<p> <c:out value="${errors}"></c:out> </p>
+				</div>
+			</c:if>
 	
 
   <div class="row justify-content-md-center">

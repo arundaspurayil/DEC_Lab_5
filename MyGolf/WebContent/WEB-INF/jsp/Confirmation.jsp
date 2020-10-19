@@ -10,7 +10,7 @@
 	<div class="row justify-content-md-center">
 		<div class="col-md-8">
 			<div class="alert alert-success" role="alert">
-  Thank you for ordering from MyGolfStore. Your order id is 2BN15627. Your order will be delivered in 3-5 business days.
+  Thank you for ordering from MyGolfStore. Your order id is <c:out value="${orderId}"></c:out>. Your order will be delivered in 3-5 business days.
 			</div>
 		</div>
 	</div>

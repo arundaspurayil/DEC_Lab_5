@@ -2,15 +2,17 @@ package edu.osu.cse5234.model;
 
 import java.io.Serializable;
 
-public class Item implements Serializable{
+import edu.osu.cse5234.model.Item;
+
+public class Item implements Serializable {
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 9114872907196583964L;
+	private static final long serialVersionUID = -1268965135247453469L;
 	private String name;
 	private String price;
 	private String quantity;
-	
 	public String getName() {
 		return name;
 	}
@@ -29,5 +31,5 @@ public class Item implements Serializable{
 	public void setQuantity(String quantity) {
 		this.quantity = quantity;
 	}
-	
+
 }
