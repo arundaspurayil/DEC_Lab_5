@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  * Session Bean implementation class InventoryServiceBean
@@ -16,7 +18,11 @@ import javax.ejb.Stateless;
 @Stateless
 @Remote(InventoryService.class)
 public class InventoryServiceBean implements InventoryService {
-
+	@PersistenceContext
+	EntityManager entityManager;
+	
+	public final String MY_QUERY = "Select i from Item i";
+	
     /**
      * Default constructor. 
      */
@@ -27,40 +33,24 @@ public class InventoryServiceBean implements InventoryService {
     public Inventory getAvailableInventory() {
     	
     	Inventory inventory = new Inventory();
-    	List<Item> storeItems = new ArrayList<>();
-    	
-    	Item golfBalls = new Item();
-		golfBalls.setName("Golf Balls");
-		golfBalls.setPrice("1");
-		
-		Item wedge = new Item();
-		wedge.setName("Wedge");
-		wedge.setPrice("100");
-		
-		Item driver = new Item();
-		driver.setName("Driver");
-		driver.setPrice("400");
-		
-		Item golfShoes = new Item();
-		golfShoes.setName("Golf Shoes");
-		golfShoes.setPrice("25");
-		
-		Item golfGloves = new Item();
-		golfGloves.setName("Golf Gloves");
-		golfGloves.setPrice("5");
-		
-		storeItems.add(golfBalls);
-		storeItems.add(wedge);
-		storeItems.add(driver);
-		storeItems.add(golfShoes);
-		storeItems.add(golfGloves);
-		
+    	List<Item> storeItems = entityManager.createQuery(MY_QUERY, Item.class).getResultList();
 		inventory.setListofItems(storeItems);
 		
 		return inventory;
     }
     
 	public boolean validateQuantity(List<Item> items) {
+		Inventory inventory = getAvailableInventory();
+		List<Item> storeItems = inventory.getListofItems();
+		for(int x = 0; x < storeItems.size(); x++) {
+			int userQuantity = Integer.parseInt(items.get(x).getQuantity());
+			int storeQuantity = Integer.parseInt(storeItems.get(x).getQuantity());
+			
+			if(userQuantity > storeQuantity) {
+				return false;
+			}
+			
+		}
 		return true;
 	}
 	public boolean updateInventory(List<Item> items) {
