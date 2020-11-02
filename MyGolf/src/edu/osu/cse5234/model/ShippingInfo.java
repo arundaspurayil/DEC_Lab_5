@@ -1,12 +1,45 @@
 package edu.osu.cse5234.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name="SHIPPING_INFO")
 public class ShippingInfo {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="ID")
+	private int id;
+	
+	@Transient
 	private String name;
+	
+	@Column(name="EMAIL")
+	private String emailAddress;
+	
+	@Column(name="ADDRESS1")
 	private String addressLine1;
+	
+	@Column(name="ADDRESS2")
 	private String addressLine2;
+	
+	@Column(name="CITY")
 	private String city;
+	
+	@Column(name="STATE")
 	private String state;
+	
+	@Column(name="POSTAL_CODE")
 	private String zip;
+	
+	@Column(name="COUNTRY")
+	private String country;
 	
 	public String getName() {
 		return name;
@@ -44,6 +77,23 @@ public class ShippingInfo {
 	public void setZip(String zip) {
 		this.zip = zip;
 	}
-	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
 	
 }

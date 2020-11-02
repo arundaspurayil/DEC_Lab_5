@@ -28,32 +28,32 @@ public class RootController {
 	public String checkQuantities(HttpServletRequest request, HttpServletResponse response) {
 		String error = "";
 		
-		try {
-			int golfBallsQuantity = Integer.parseInt(request.getParameter("golfBallsQuantity"));
-			int wedgeQuantity = Integer.parseInt(request.getParameter("wedgeQuantity"));
-			int driverQuantity = Integer.parseInt(request.getParameter("driverQuantity"));
-			int golfShoesQuantity = Integer.parseInt(request.getParameter("golfShoesQuantity"));
-			int golfGlovesQuantity = Integer.parseInt(request.getParameter("golfGlovesQuantity"));
-			
-			if(golfBallsQuantity>200) {
-				error += "Only 200 Golf Balls in Stock.";
-			}
-			if(wedgeQuantity > 50) {
-				error += "Only 50 Wedges in Stock.";
-			}
-			if(driverQuantity > 25) {
-				error += "Only 25 Drivers in Stock.";
-			}
-			if(golfShoesQuantity > 100) {
-				error += "Only 100 Golf Shoes in Stock.";
-			}
-			if(golfGlovesQuantity > 5) {
-				error += "Only 5 Golf Gloves in Stock.";
-			}
-		}catch(Exception e) {
-			error += "Invalid Quantity.\n";
-		}
-		System.out.println(error);
+//		try {
+//			int golfBallsQuantity = Integer.parseInt(request.getParameter("golfBallsQuantity"));
+//			int wedgeQuantity = Integer.parseInt(request.getParameter("wedgeQuantity"));
+//			int driverQuantity = Integer.parseInt(request.getParameter("driverQuantity"));
+//			int golfShoesQuantity = Integer.parseInt(request.getParameter("golfShoesQuantity"));
+//			int golfGlovesQuantity = Integer.parseInt(request.getParameter("golfGlovesQuantity"));
+//			
+//			if(golfBallsQuantity>1000) {
+//				error += "Only 1000 Golf Balls in Stock.";
+//			}
+//			if(wedgeQuantity > 1000) {
+//				error += "Only 1000 Wedges in Stock.";
+//			}
+//			if(driverQuantity > 1000) {
+//				error += "Only 1000 Drivers in Stock.";
+//			}
+//			if(golfShoesQuantity > 1000) {
+//				error += "Only 1000 Golf Shoes in Stock.";
+//			}
+//			if(golfGlovesQuantity > 1000) {
+//				error += "Only 1000 Golf Gloves in Stock.";
+//			}
+//		}catch(Exception e) {
+//			error += "Invalid Quantity.\n";
+//		}
+//		System.out.println(error);
 		return error;
 		
 	}

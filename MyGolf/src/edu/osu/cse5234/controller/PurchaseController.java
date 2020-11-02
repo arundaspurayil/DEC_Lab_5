@@ -1,6 +1,7 @@
 package edu.osu.cse5234.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import edu.osu.cse5234.business.OrderProcessingServiceBean;
 import edu.osu.cse5234.business.view.Inventory;
 import edu.osu.cse5234.business.view.InventoryService;
-import edu.osu.cse5234.model.Item;
+import edu.osu.cse5234.model.LineItem;
 import edu.osu.cse5234.model.Order;
 import edu.osu.cse5234.model.PaymentInfo;
 import edu.osu.cse5234.model.ShippingInfo;
@@ -34,29 +35,31 @@ public class PurchaseController {
 		
 		InventoryService inventoryService = ServiceLocator.getInventoryService();
 		Inventory inventory = inventoryService.getAvailableInventory();
-		List<Item> storeItems = inventory.getListofItems();
 		
+		List<LineItem> lineItems = new ArrayList<LineItem>();
 		Order order = new Order();
-		order.setItems(storeItems);
+		for (int i=0; i<inventory.getListofItems().size(); i++) {
+			lineItems.add(new LineItem());
+		}
+		order.setLineItems(lineItems);
 		
+		request.setAttribute("inventory", inventory);
 		request.setAttribute("order", order);
 		return "OrderEntryForm";
 	}
 	
 	@RequestMapping(path = "/submitItems", method = RequestMethod.POST)
 	public String submitItems(@ModelAttribute("order") Order order, HttpServletRequest request) {
-		List<Item> userItems = order.getItems();
+		List<LineItem> userItems = order.getLineItems();
 		int total = 0;
 		for(int x = 0; x < userItems.size(); x++) {
-			if (userItems.get(x).getQuantity().isEmpty()) {
-				userItems.get(x).setQuantity("0");
-			}
-			if (!onlyDigits(userItems.get(x).getQuantity())) {
+
+			if (!onlyDigits(Integer.toString(userItems.get(x).getQuantity()))) {
 				error = userItems.get(x).getName() + "'s quantity is not allowed.\n";
 				request.getSession().setAttribute("errors", error);
 				return "redirect:/purchase";
 			}
-			int userQuantity = Integer.parseInt(userItems.get(x).getQuantity());
+			int userQuantity = userItems.get(x).getQuantity();
 			
 			if (userQuantity < 0) {
 				error = userItems.get(x).getName() + "'s quantity cannot be negative.\n";
@@ -64,13 +67,13 @@ public class PurchaseController {
 				return "redirect:/purchase";
 			}
 			
-			total += userQuantity * Integer.parseInt(userItems.get(x).getPrice());
+			total += userQuantity * userItems.get(x).getPrice();
 		}
 		
 		OrderProcessingServiceBean orderProcessor = ServiceLocator.getOrderProcessingService();
 		boolean validOrder = orderProcessor.validateItemAvailability(order); 
 		if (!validOrder) {
-			error = "Please resubmit item quantities\n";
+			error = "Selected quantity more than in stock.\n";
 			request.getSession().setAttribute("errors", error);
 			return "redirect:/purchase";
 		}
@@ -117,6 +120,10 @@ public class PurchaseController {
 		}
 		
 		request.getSession().setAttribute("payment", payment);
+		Order order = (Order)request.getSession().getAttribute("order");
+		order.setPaymentInfo(payment);
+		request.setAttribute("order", order);
+		request.getSession().setAttribute("order", order);
 		return "redirect:/purchase/shippingEntry";
 		
 	}
@@ -145,7 +152,12 @@ public class PurchaseController {
 		}
 		
 		request.getSession().setAttribute("shipping", shipping);
-		
+		Order order = (Order)request.getSession().getAttribute("order");
+		order.setShippingInfo(shipping);
+		order.setCustomerName(shipping.getName());
+		order.setEmailAddress(shipping.getEmailAddress());
+		request.setAttribute("order", order);
+		request.getSession().setAttribute("order", order);
 		return "redirect:/purchase/viewOrder";
 	}
 	

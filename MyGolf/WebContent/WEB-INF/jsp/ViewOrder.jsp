@@ -26,7 +26,7 @@
 	    		<th> Price </th>
 	    		<th> Quantity </th>
 	    	</tr>
-			<c:forEach items="${order.items}" var="item">
+			<c:forEach items="${order.lineItems}" var="item">
 				<tr>
 					<td>${item.name}</td>
 					<td>$${item.price}</td>
@@ -73,6 +73,10 @@
 	    		<td> Name </td>
 	    		<td> ${shipping.name}</td>
 	    	</tr>
+	    	<tr> 
+	    		<td> Email </td>
+	    		<td> ${shipping.emailAddress}</td>
+	    	</tr>
 	    	<tr>
 	    		<td> Address Line 1 </td>
 	    		<td> ${shipping.addressLine1}</td>
@@ -88,6 +92,10 @@
 	    	<tr>
 	    		<td> State </td>
 	    		<td> ${shipping.state}</td>
+	    	</tr>
+	    	<tr>
+	    		<td> State </td>
+	    		<td> ${shipping.country}</td>
 	    	</tr>
 	    	<tr>
 	    		<td> Zipcode </td>

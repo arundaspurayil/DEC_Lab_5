@@ -2,7 +2,10 @@ package edu.osu.cse5234.business;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
+import edu.osu.cse5234.business.view.Inventory;
 import edu.osu.cse5234.business.view.InventoryService;
 import edu.osu.cse5234.model.Order;
 import edu.osu.cse5234.util.ServiceLocator;
@@ -14,6 +17,9 @@ import edu.osu.cse5234.util.ServiceLocator;
 @LocalBean
 public class OrderProcessingServiceBean {
 
+	@PersistenceContext
+	EntityManager entityManager;
+	
     /**
      * Default constructor. 
      */
@@ -22,18 +28,31 @@ public class OrderProcessingServiceBean {
     }
     
     public String processOrder(Order order) {
-    	InventoryService inventoryService = ServiceLocator.getInventoryService();
-    	boolean isOrderValid = inventoryService.validateQuantity(order.getItems());
+    	boolean isOrderValid = validateItemAvailability(order);
     	if (isOrderValid) {
-    		inventoryService.updateInventory(order.getItems());
+    		entityManager.persist(order);
+    		entityManager.flush();
     		return "2BN15627";
     	}
-    	return null;
+    	return "error";
     }
     
     public boolean validateItemAvailability(Order order) {
     	InventoryService inventoryService = ServiceLocator.getInventoryService();
-    	return inventoryService.validateQuantity(order.getItems());
+    	Inventory inventory = inventoryService.getAvailableInventory();
+    	for(int i=0; i<inventory.getListofItems().size(); i++) {
+    		for(int j=0; j<order.getLineItems().size(); j++) {
+    			if (order.getLineItems().get(j).getItemNumber() ==
+    					(inventory.getListofItems().get(i).getItemNumber())) {
+    				if (order.getLineItems().get(j).getQuantity() >
+    						inventory.getListofItems().get(i).getQuantity()) {
+    					return false;
+    				}
+    			}
+    		}
+    	}
+//    	return inventoryService.validateQuantity(order.getItems());
+    	return true;
     }
 
 }

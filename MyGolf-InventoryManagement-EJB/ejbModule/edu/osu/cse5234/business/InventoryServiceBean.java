@@ -40,17 +40,17 @@ public class InventoryServiceBean implements InventoryService {
     }
     
 	public boolean validateQuantity(List<Item> items) {
-		Inventory inventory = getAvailableInventory();
-		List<Item> storeItems = inventory.getListofItems();
-		for(int x = 0; x < storeItems.size(); x++) {
-			int userQuantity = Integer.parseInt(items.get(x).getQuantity());
-			int storeQuantity = Integer.parseInt(storeItems.get(x).getQuantity());
-			
-			if(userQuantity > storeQuantity) {
-				return false;
-			}
-			
-		}
+//		Inventory inventory = getAvailableInventory();
+//		List<Item> storeItems = inventory.getListofItems();
+//		for(int x = 0; x < storeItems.size(); x++) {
+//			int userQuantity = Integer.parseInt(items.get(x).getQuantity());
+//			int storeQuantity = Integer.parseInt(storeItems.get(x).getQuantity());
+//			
+//			if(userQuantity > storeQuantity) {
+//				return false;
+//			}
+//			
+//		}
 		return true;
 	}
 	public boolean updateInventory(List<Item> items) {

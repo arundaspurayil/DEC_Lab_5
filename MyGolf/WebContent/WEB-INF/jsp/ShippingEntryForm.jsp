@@ -25,6 +25,10 @@
 							<td>Name</td>
 							<td><form:input path="name"/></td>
 						</tr>
+						<tr>
+							<td>Email</td>
+							<td><form:input path="emailAddress"/></td>
+						</tr>
 						<tr>	
 							<td>Address Line 1</td>
 							<td><form:input path="addressLine1"/></td>
@@ -40,6 +44,10 @@
 						<tr>	
 							<td>State</td>
 							<td><form:input path="state"/></td>
+						</tr>
+						<tr>	
+							<td>Country</td>
+							<td><form:input path="country"/></td>
 						</tr>
 						<tr>	
 							<td>Zipcode</td>
